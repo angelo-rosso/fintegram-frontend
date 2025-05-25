@@ -1,0 +1,32 @@
+// 1. Fintegram Custom Colors
+$primary:   #13A8FE;  // Brand blue
+$secondary: #7B90A1;  // Steel grey
+$dark:      #120052;  // Deep purple
+
+$info:      #77CFE7;  // Soft highlight blue
+$warning: #FFB300; // amber (more elegant, better contrast)
+$success:   #43B36D;  // Optional green
+$danger:    #C62828;  // Optional red
+
+// 2. Typography & layout
+$body-bg: #f9f9f9;
+$body-color: #120052;
+$font-family-base: 'Helvetica Neue', Arial, sans-serif;
+
+.fintegram-heading {
+    font-weight: 700;
+    color: #120052;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+}
+.fintegram-subtitle {
+    font-size: 1.2rem;
+    color: #7B90A1; /* Your $secondary / steel grey */
+    font-weight: 400;
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+// 3. Import Bootstrap
+@import "bootstrap/scss/bootstrap";
