@@ -33,7 +33,7 @@
               <router-link to="/educacion" class="nav-link" exact-active-class="active" @click="collapseMenu">Educación</router-link>
             </li>
             <li class="nav-item">
-              <a href="#contacto" class="nav-link" @click="collapseMenu">Contacto</a>
+              <a href="/contact" class="nav-link" @click="collapseMenu">Contacto</a>
             </li>
           </ul>
         </div>

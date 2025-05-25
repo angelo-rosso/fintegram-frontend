@@ -1,20 +1,17 @@
-// src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-
 import Home from '@/views/Home.vue'
-import Certificacion from '@/views/Certificacion.vue'
+import Contact from '@/views/Contact.vue'
+import Education from '@/views/Education.vue'
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
-{ path: '/certificacion', name: 'Certificacion', component: Certificacion },
+    { path: '/contact', name: 'Contacto', component: Contact },
+    { path: '/education', name: 'Educacion', component: Education }
+// other routes...
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
-                            routes,
-                            scrollBehavior() {
-                                return { top: 0, behavior: 'smooth' }
-                            }
+    history: createWebHistory(), routes,
 })
 
 export default router

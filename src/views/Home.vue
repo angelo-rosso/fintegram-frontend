@@ -5,6 +5,7 @@
   <HomeFourth />
   <HomeFifth />
   <HomeSixth />
+  <ContactForm />
 </template>
 
 <script setup>
@@ -14,4 +15,5 @@
   import HomeFourth from '@/components/HomeFourth.vue'
   import HomeFifth from '@/components/HomeFifth.vue'
   import HomeSixth from '@/components/HomeSixth.vue'
+  import ContactForm from '@/components/ContactForm.vue'
 </script>
