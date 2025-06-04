@@ -15,16 +15,27 @@
           <label for="message">Mensaje</label>
           <textarea id="message" v-model="form.message" rows="4" required></textarea>
         </div>
-        <button id="contactSubmitBtn" type="submit">Enviar</button>
+
+        <Spinner v-if="loading" :size="32" :border="5" />
+
+
+        <button :disabled="loading" type="submit" id="contactSubmitBtn">
+        {{ loading ? 'Enviando...' : 'Enviar' }}
+        </button>
+
         <div
           id="contactMessage"
           class="mt-3"
           v-if="submitted"
-          style="color: green;"
-        >
+          style="color: green;">
           ¡Gracias por tu mensaje!
         </div>
       </form>
+
+      <div v-if="loading" class="status-message loading">Enviando mensaje...</div>
+      <div v-if="success" class="status-message success">¡Gracias por tu mensaje!</div>
+      <div v-if="error" class="status-message error">{{ error }}</div>
+
     </section>
 
 
@@ -33,6 +44,9 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useSubmissionState } from '@/composables/useSubmissionState'
+import Spinner from '@/components/Spinner.vue'
+
 
 const form = ref({
   name: '',
@@ -40,20 +54,40 @@ const form = ref({
   message: ''
 })
 
-const submitted = ref(false)
-const currentYear = new Date().getFullYear()
+const { loading, success, error, reset } = useSubmissionState()
 
-function handleSubmit() {
-  // Here you’d send the form data to an API or email handler.
-  console.log('Form submitted:', form.value)
+async function handleSubmit() {
+  reset()
+  loading.value = true
 
-  submitted.value = true
-  setTimeout(() => (submitted.value = false), 5000)
+  try {
+    const API_URL = import.meta.env.VITE_API_URL
 
-  // Reset form
-  form.value = { name: '', email: '', message: '' }
+    const response = await fetch(`${API_URL}/contact/request`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form.value)
+    })
+
+    if (!response.ok) {
+      throw new Error(await response.text())
+    }
+
+    success.value = true
+    form.value = { name: '', email: '', message: '' }
+
+    setTimeout(() => {
+      success.value = false
+    }, 5000)
+  } catch (err) {
+    error.value = 'No se pudo enviar el formulario.'
+    console.error(err)
+  } finally {
+    loading.value = false
+  }
 }
 </script>
+
 
 <style scoped>
 .contact-form {
@@ -73,6 +107,21 @@ function handleSubmit() {
 .form-group {
   margin-bottom: 1.5rem;
 }
+
+.status-message {
+  text-align: center;
+  margin-top: 1rem;
+}
+.status-message.success {
+  color: green;
+}
+.status-message.loading {
+  color: gray;
+}
+.status-message.error {
+  color: red;
+}
+
 
 label {
   display: block;
