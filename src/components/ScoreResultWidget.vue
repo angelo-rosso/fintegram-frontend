@@ -1,23 +1,30 @@
 <template>
   <div class="score-result" v-if="score">
-    <h3 class="status-name" :style="{ color: scoreColor }">
-      {{ props.score.scoreStatusName }}
-    </h3>
+   <h3 class="status-name" :style="{ color: scoreColor }">{{ scoreStatusName }}</h3>
 
+    <ScoreSvgGauge
+      :score="score"
+      :scoreStatusName="scoreStatusName"
+      :scoreStatusDescription="scoreStatusDescription"
+      @animation-complete="onGaugeAnimationComplete"
+    />
     <div class="score-widget">
-    <h3>{{ score.scoreStatusName }}</h3>
-    <p>{{ score.scoreStatusDescription }}</p>
-        <ScoreSvgGauge
-        :score="score"
-        :scoreStatusDescription="props.score.scoreStatusDescription"
-        />
-  </div>
+      <h3>{{ score.scoreStatusName }}</h3>
+      <p>{{ score.scoreStatusDescription }}</p>
+
+    </div>
+    <button
+  class="action-button"
+  :disabled="!gaugeDone"
+>
+  Solicitar Informe
+</button>
   </div>
 </template>
 
+
 <script setup>
-import { computed } from 'vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import ScoreSvgGauge from '@/components/ScoreSvgGauge.vue'
 
 const props = defineProps({
@@ -26,30 +33,43 @@ const props = defineProps({
     required: true
   }
 })
+
 const score = computed(() => props.score.fintegramScore)
+const scoreStatusName = computed(() => props.score.scoreStatusName)
+const scoreStatusDescription = computed(() => props.score.scoreStatusDescription)
+const gaugeDone = ref(false)
 
-const scoreColor = computed(() => {
-  const value = score.value // between 0 and 1000
+function onGaugeAnimationComplete() {
+  gaugeDone.value = true
+}
 
-  function interpolate(c1, c2, ratio) {
-    const hex = (h) => parseInt(h, 16)
-    const r1 = hex(c1.slice(1, 3)), g1 = hex(c1.slice(3, 5)), b1 = hex(c1.slice(5, 7))
-    const r2 = hex(c2.slice(1, 3)), g2 = hex(c2.slice(3, 5)), b2 = hex(c2.slice(5, 7))
-    const r = Math.round(r1 + (r2 - r1) * ratio)
-    const g = Math.round(g1 + (g2 - g1) * ratio)
-    const b = Math.round(b1 + (b2 - b1) * ratio)
-    return `rgb(${r},${g},${b})`
-  }
+const scoreColor = computed(() => getGradientColor(props.score.fintegramScore))
 
-  if (value <= 333) {
-    return interpolate('#d63031', '#fdcb6e', value / 333) // red → yellow
-  } else if (value <= 666) {
-    return interpolate('#fdcb6e', '#00b894', (value - 333) / 333) // yellow → green
+
+function getGradientColor(score) {
+  if (score <= 500) {
+    const ratio = score / 500
+    return interpolateColor('#d63031', '#fdcb6e', ratio) // red → yellow
+  } else if (score <= 750) {
+    const ratio = (score - 500) / 250
+    return interpolateColor('#fdcb6e', '#00b894', ratio) // yellow → green
   } else {
-    return interpolate('#00b894', '#0984e3', (value - 666) / 334) // green → blue
+    const ratio = (score - 750) / 250
+    return interpolateColor('#00b894', '#0984e3', ratio) // green → blue
   }
-})
+}
 
+function interpolateColor(c1, c2, t) {
+  const hex = (h) => parseInt(h, 16)
+  const r1 = hex(c1.slice(1, 3)), g1 = hex(c1.slice(3, 5)), b1 = hex(c1.slice(5, 7))
+  const r2 = hex(c2.slice(1, 3)), g2 = hex(c2.slice(3, 5)), b2 = hex(c2.slice(5, 7))
+
+  const r = Math.round(r1 + (r2 - r1) * t)
+  const g = Math.round(g1 + (g2 - g1) * t)
+  const b = Math.round(b1 + (b2 - b1) * t)
+
+  return `rgb(${r},${g},${b})`
+}
 </script>
 
 
@@ -85,4 +105,28 @@ const scoreColor = computed(() => {
   color: #0a8ef2;
   margin-top: 1rem;
 }
+
+.action-button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #0094e8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-weight: bold
+}
+
+.action-button:hover:enabled {
+  background-color: #0078c2;
+}
+
+.action-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
 </style>
