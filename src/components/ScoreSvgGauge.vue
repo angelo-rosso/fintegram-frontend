@@ -71,7 +71,11 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
+
+function easeOutCubic(t) {
+  return 1 - Math.pow(1 - t, 3)
+}
 
 const props = defineProps({
   score: { type: Number, required: true },
@@ -79,10 +83,45 @@ const props = defineProps({
   scoreStatusDescription: String
 })
 
-const angle = computed(() => (props.score / 1000) * 180)
+// Animate from currentAngle to targetAngle
+const currentAngle = ref(0)
 
-const needleX = computed(() => 100 + 70 * Math.cos(Math.PI - (angle.value * Math.PI / 180)))
-const needleY = computed(() => 100 - 70 * Math.sin(Math.PI - (angle.value * Math.PI / 180)))
+const targetAngle = computed(() => (props.score / 1000) * 180)
+
+watch(
+  () => props.score,
+  () => {
+    animateNeedle()
+  },
+  { immediate: true }
+)
+
+function animateNeedle() {
+  const start = currentAngle.value
+  const end = targetAngle.value
+  const duration = 1500
+  const startTime = performance.now()
+
+  function update(time) {
+    const elapsed = time - startTime
+    const progress = Math.min(elapsed / duration, 1)
+    const eased = easeOutCubic(progress)
+
+    currentAngle.value = start + (end - start) * eased
+
+    if (progress < 1) {
+      requestAnimationFrame(update)
+    } else {
+      currentAngle.value = end
+    }
+  }
+
+  requestAnimationFrame(update)
+}
+
+// Needle coordinates based on animated angle
+const needleX = computed(() => 100 + 70 * Math.cos(Math.PI - (currentAngle.value * Math.PI / 180)))
+const needleY = computed(() => 100 - 70 * Math.sin(Math.PI - (currentAngle.value * Math.PI / 180)))
 
 const tickValues = [0, 250, 500, 750, 1000]
 
@@ -95,6 +134,7 @@ function tickY(value, radius) {
   return 100 - radius * Math.sin(Math.PI - (a * Math.PI / 180))
 }
 </script>
+
 
 <style scoped>
 .svg-gauge {
@@ -109,9 +149,11 @@ function tickY(value, radius) {
   margin-top: 0.5rem;
   font-size: 1.1rem;
   color: #1b365d;
+  font-weight: bold;
 }
 .status-description {
   font-size: 0.9rem;
   color: #1b365d;
+  font-weight: bold;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="score-result" v-if="score">
     <h3 class="status-name" :style="{ color: scoreColor }">
-  {{ props.score.scoreStatusName }}
-</h3>
+      {{ props.score.scoreStatusName }}
+    </h3>
 
     <div class="score-widget">
     <h3>{{ score.scoreStatusName }}</h3>
@@ -70,6 +70,9 @@ const scoreColor = computed(() => {
   justify-content: center; /* centers vertically if needed */
 }
 
+.status-name {
+  font-weight: bold;
+}
 
 .score-result p {
   margin: 0.5rem 0;
