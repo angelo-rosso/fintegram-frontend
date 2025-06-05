@@ -7,7 +7,9 @@
 
     <div class="overlay-content">
       <UploadWidget @uploaded="handleUploadResponse" />
+      <transition name="fade" appear>
       <ScoreResultWidget v-if="scoreData" :score="scoreData" />
+      </transition>
     </div>
   </div>
 </template>
@@ -56,5 +58,15 @@ function handleUploadResponse(score) {
   height: 100vh;                  /* full viewport height */
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.4); /* optional: dark overlay for contrast */
+}
+
+.fade-enter-active {
+  transition: opacity 0.8s ease;
+}
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-to {
+  opacity: 1;
 }
 </style>

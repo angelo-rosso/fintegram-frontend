@@ -152,6 +152,7 @@ function tickY(value, radius) {
   font-weight: bold;
 }
 .status-description {
+  padding-top: 1rem;
   font-size: 0.9rem;
   color: #1b365d;
   font-weight: bold;
