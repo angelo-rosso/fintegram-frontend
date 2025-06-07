@@ -14,11 +14,10 @@
 
     </div>
     <button
-  class="action-button"
-  :disabled="!gaugeDone"
->
-  Solicitar Informe
-</button>
+      class="action-button"
+      :disabled="!gaugeDone">
+      Solicitar Informe
+    </button>
   </div>
 </template>
 

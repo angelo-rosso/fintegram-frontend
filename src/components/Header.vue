@@ -30,7 +30,7 @@
               <router-link to="/scoring" class="nav-link" exact-active-class="active" @click="collapseMenu">Scoring</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/educacion" class="nav-link" exact-active-class="active" @click="collapseMenu">Educación</router-link>
+              <router-link to="/education" class="nav-link" exact-active-class="active" @click="collapseMenu">Educación</router-link>
             </li>
             <li class="nav-item">
               <a href="/contact" class="nav-link" @click="collapseMenu">Contacto</a>
