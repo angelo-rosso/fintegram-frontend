@@ -1,26 +1,25 @@
 <template>
   <div class="contact-page">
     <section class="contact-form">
-      <h2>Contáctanos</h2>
+      <h2>{{ $t('contact.title') }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
-          <label for="name">Nombre</label>
+          <label for="name">{{ $t('contact.name') }}</label>
           <input type="text" id="name" v-model="form.name" required />
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">{{ $t('contact.email') }}</label>
           <input type="email" id="email" v-model="form.email" required />
         </div>
         <div class="form-group">
-          <label for="message">Mensaje</label>
+          <label for="message">{{ $t('contact.message') }}</label>
           <textarea id="message" v-model="form.message" rows="4" required></textarea>
         </div>
 
         <Spinner v-if="loading" :size="32" :border="5" />
 
-
         <button :disabled="loading" type="submit" id="contactSubmitBtn">
-        {{ loading ? 'Enviando...' : 'Enviar' }}
+          {{ loading ? $t('contact.sending') : $t('contact.send') }}
         </button>
 
         <div
@@ -28,19 +27,17 @@
           class="mt-3"
           v-if="submitted"
           style="color: green;">
-          ¡Gracias por tu mensaje!
+          {{ $t('contact.success') }}
         </div>
       </form>
 
-      <div v-if="loading" class="status-message loading">Enviando mensaje...</div>
-      <div v-if="success" class="status-message success">¡Gracias por tu mensaje!</div>
-      <div v-if="error" class="status-message error">{{ error }}</div>
-
+      <div v-if="loading" class="status-message loading">{{ $t('contact.loadingStatus') }}</div>
+      <div v-if="success" class="status-message success">{{ $t('contact.success') }}</div>
+      <div v-if="error" class="status-message error">{{ $t('contact.error') }}</div>
     </section>
-
-
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue'

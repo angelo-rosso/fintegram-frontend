@@ -5,10 +5,8 @@
         <div class="row align-items-center flex-column-reverse flex-lg-row">
           <!-- Text -->
           <div class="col-lg-6 text-center text-lg-start mt-4 mt-lg-0 animate-slide-left">
-            <h1 class="fintegram-heading">Tu camino con Fintegram</h1>
-            <p class="fintegram-subtitle">
-              Te guiamos paso a paso hacia tu crecimiento empresarial.
-            </p>
+            <h1 class="fintegram-heading">{{ t('journey.title') }}</h1>
+            <p class="fintegram-subtitle">{{ t('journey.subtitle') }}</p>
           </div>
 
           <!-- Carousel -->
@@ -23,12 +21,11 @@
                 <div
                   v-for="(step, index) in steps"
                   :key="index"
-                  :class="['carousel-item', { active: index === 0 }]"
-                >
+                  :class="['carousel-item', { active: index === 0 }]">
                   <div class="step px-4">
-                    <div class="display-3 mb-3">{{ step.icon }}</div>
-                    <h3 class="h4 text-primary">{{ step.title }}</h3>
-                    <p class="text-secondary">{{ step.description }}</p>
+                    <div class="display-3 mb-3">{{ t(step.icon) }}</div>
+                    <h3 class="h4 text-primary">{{ t(step.title) }}</h3>
+                    <p class="text-secondary">{{ t(step.description) }}</p>
                   </div>
                 </div>
               </div>
@@ -49,27 +46,30 @@
 
 <script setup>
 import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const steps = [
   {
-    title: 'Registro',
     icon: '📝',
-    description: 'Ingresa tus credenciales para enrolarte en Fintegram.'
+    title: 'journey.step1.title',
+    description: 'journey.step1.desc'
   },
   {
-    title: 'Radiografía',
     icon: '🔍',
-    description: 'Accede a tu perfil financiero y genera un reporte.'
+    title: 'journey.step2.title',
+    description: 'journey.step2.desc'
   },
   {
-    title: 'Consultoría',
     icon: '⚙️',
-    description: 'Recibe análisis y recomendaciones a medida.'
+    title: 'journey.step3.title',
+    description: 'journey.step3.desc'
   },
   {
-    title: 'Certificación',
     icon: '📄',
-    description: 'Certificación financiera, legal y tributaria.'
+    title: 'journey.step4.title',
+    description: 'journey.step4.desc'
   }
 ]
 

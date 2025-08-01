@@ -5,18 +5,16 @@
         <div class="row align-items-center flex-column-reverse flex-lg-row">
           <!-- Text -->
           <div class="col-lg-6 text-center text-lg-start mt-4 mt-lg-0 animate-slide-left">
-            <h1 class="fintegram-heading">Banca Pyme a la medida</h1>
-            <p class="fintegram-subtitle">
-              Soluciones financieras adaptadas a las necesidades de tu negocio.
-            </p>
+            <h1 class="fintegram-heading">{{ t('banking.title') }}</h1>
+            <p class="fintegram-subtitle">{{ t('banking.subtitle') }}</p>
           </div>
 
           <!-- 2x2 image grid -->
           <div class="col-lg-6 animate-slide-right">
             <div class="grid-2x2">
               <div v-for="(item, index) in gridImages" :key="index" class="circle-img-container">
-                <img :src="item.src" :alt="item.alt" class="circle-img" />
-                <div class="hover-label">{{ item.label }}</div>
+                <img :src="item.src" :alt="t(item.alt)" class="circle-img" />
+                <div class="hover-label">{{ t(item.label) }}</div>
               </div>
             </div>
           </div>
@@ -31,13 +29,16 @@ import factoring from '@/assets/img/factoring.webp'
 import investment from '@/assets/img/investment.webp'
 import insurance from '@/assets/img/insurance.webp'
 import credit from '@/assets/img/credit.webp'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const gridImages = [
-  { src: factoring, alt: 'Factoring', label: 'Factoring' },
-  { src: investment, alt: 'Inversión', label: 'Inversión' },
-  { src: insurance, alt: 'Seguros', label: 'Seguros' },
-  { src: credit, alt: 'Línea de Crédito', label: 'Línea de Crédito' }
+  { src: factoring, alt: 'banking.option.factoring', label: 'banking.option.factoring' },
+  { src: investment, alt: 'banking.option.investment', label: 'banking.option.investment' },
+  { src: insurance, alt: 'banking.option.insurance', label: 'banking.option.insurance' },
+  { src: credit, alt: 'banking.option.creditLine', label: 'banking.option.creditLine' }
 ]
+
 </script>
 
 

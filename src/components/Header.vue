@@ -24,16 +24,24 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <router-link to="/" class="nav-link" exact-active-class="active" @click="collapseMenu">Inicio</router-link>
+              <router-link to="/" class="nav-link" exact-active-class="active" @click="collapseMenu">
+                {{ $t('nav.home') }}
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/scoring" class="nav-link" exact-active-class="active" @click="collapseMenu">Scoring</router-link>
+              <router-link to="/scoring" class="nav-link" exact-active-class="active" @click="collapseMenu">
+                {{ $t('nav.scoring') }}
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/education" class="nav-link" exact-active-class="active" @click="collapseMenu">Educación</router-link>
+              <router-link to="/education" class="nav-link" exact-active-class="active" @click="collapseMenu">
+                {{ $t('nav.education') }}
+              </router-link>
             </li>
             <li class="nav-item">
-              <a href="/contact" class="nav-link" @click="collapseMenu">Contacto</a>
+              <a href="/contact" class="nav-link" @click="collapseMenu">
+                {{ $t('nav.contact') }}
+              </a>
             </li>
           </ul>
         </div>
@@ -41,6 +49,7 @@
     </nav>
   </header>
 </template>
+
 
 <script setup>
 function collapseMenu() {

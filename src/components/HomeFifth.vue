@@ -5,8 +5,8 @@
         <div class="row align-items-center flex-column-reverse flex-lg-row">
           <!-- Text -->
           <div class="col-lg-6 text-center text-lg-start mt-4 mt-lg-0 animate-slide-left">
-            <h1 class="fintegram-heading">Evaluación crediticia</h1>
-            <p class="fintegram-subtitle">Carga de carpeta tributaria electrónica</p>
+            <h1 class="fintegram-heading">{{ $t('hero.title') }}</h1>
+            <p class="fintegram-subtitle">{{ $t('hero.subtitle') }}</p>
           </div>
 
           <!-- Gauge -->
@@ -26,7 +26,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const gaugeCanvas = ref(null)
 const currentValue = ref(0)
 let intervalId = null
@@ -38,7 +40,7 @@ const drawGauge = (ctx, value) => {
   ctx.font = '16px Helvetica Neue, Arial, sans-serif'
   ctx.fillStyle = '#120052'
   ctx.textAlign = 'center'
-  ctx.fillText('Tu evaluación crediticia', 125, 30)
+  ctx.fillText(t('hero.canvasLabel'), 125, 30)
 
   // Gradient
   const gradient = ctx.createLinearGradient(45, 0, 205, 0)

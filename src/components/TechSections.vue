@@ -17,19 +17,22 @@
 <script setup>
 import techImage from '@/assets/img/tech-image.webp'
 import teamworkImage from '@/assets/img/teamwork-image.webp'
+import { useI18n } from 'vue-i18n'
+
+const { t: $t } = useI18n()
 
 const sections = [
   {
-    title: 'Tecnología',
-    text: 'Aplicamos tecnología apalancada en big data para generar leads con un alto porcentaje de conversión.',
+    title: $t('sixthSection.tech.title'),
+    text: $t('sixthSection.tech.text'),
     image: techImage,
-    alt: 'Tecnología'
+    alt: $t('sixthSection.tech.alt')
   },
   {
-    title: 'Ecosistema',
-    text: 'Aplicamos tecnología apalancada en big data para generar leads con un alto porcentaje de conversión.',
+    title: $t('sixthSection.eco.title'),
+    text: $t('sixthSection.eco.text'),
     image: teamworkImage,
-    alt: 'Ecosistema'
+    alt: $t('sixthSection.eco.alt')
   }
 ]
 </script>

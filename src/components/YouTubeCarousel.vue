@@ -5,13 +5,13 @@
         v-for="video in videos"
         :key="video.videoId"
         class="video-card"
-        @click.stop="toggleDescription(video.videoId)"
-      >
+        @click.stop="toggleDescription(video.videoId)">
         <img :src="video.thumbnailUrl" :alt="video.title" />
         <h3>{{ video.title }}</h3>
         <p v-if="selectedVideoId === String(video.videoId)">
-          {{ video.description || 'No description available.' }}
+          {{ video.description || $t('videoCarousel.noDescription') }}
         </p>
+        <div v-else class="empty">{{ $t('videoCarousel.empty') }}</div>
       </div>
     </div>
   </div>
@@ -21,7 +21,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
 
+const { t: $t } = useI18n()
 const carouselRef = ref(null)
 let scrollInterval
 

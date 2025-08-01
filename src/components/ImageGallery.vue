@@ -1,8 +1,8 @@
 <template>
   <section class="image-gallery">
     <div class="image-item" v-for="(item, index) in images" :key="index">
-      <img :src="item.src" :alt="item.alt" class="img-fluid" />
-      <div class="overlay-text" v-html="item.label"></div>
+      <img :src="item.src" :alt="t(item.alt)" class="img-fluid" />
+      <div class="overlay-text" v-html="t(item.label)"></div>
     </div>
   </section>
 </template>
@@ -12,12 +12,15 @@ import factoring from '@/assets/img/factoring.webp'
 import investment from '@/assets/img/investment.webp'
 import insurance from '@/assets/img/insurance.webp'
 import credit from '@/assets/img/credit.webp'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const images = [
-  { src: factoring, alt: 'Factoring', label: 'Factoring' },
-  { src: investment, alt: 'Inversión', label: 'Inversión' },
-  { src: insurance, alt: 'Seguros', label: 'Seguros' },
-  { src: credit, alt: 'Línea de Crédito', label: 'Línea de<br>Crédito' }
+  { src: factoring, alt: 'gallery.factoring', label: 'gallery.factoring' },
+  { src: investment, alt: 'gallery.investment', label: 'gallery.investment' },
+  { src: insurance, alt: 'gallery.insurance', label: 'gallery.insurance' },
+  { src: credit, alt: 'gallery.creditLine', label: 'gallery.creditLineHTML' }
 ]
 </script>
 

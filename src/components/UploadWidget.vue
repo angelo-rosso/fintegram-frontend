@@ -1,13 +1,14 @@
 <template>
   <div class="upload-container">
-    <h3 class="upload-widget-title">Sube tu carpeta tributaria<br />"para Solicitar Créditos":</h3>
+    <h3 class="upload-widget-title">
+      {{ $t('uploadWidget.title') }}<br />"{{ $t('uploadWidget.subtitle') }}"
+    </h3>
     <div
       class="drop-area"
       @dragover.prevent="isDragging = true"
       @dragleave.prevent="isDragging = false"
       @drop.prevent="handleDrop"
-      :class="{ dragging: isDragging }"
-    >
+      :class="{ dragging: isDragging }">
       <label for="fileInput">
         <div class="icon">
             <svg v-if="status === 'idle'" width="40" height="40" viewBox="0 0 24 24" fill="none">
@@ -29,8 +30,7 @@
         </div>
 
         <div class="upload-widget-text">
-          Arrastra tu archivo o <span class="browse-text">haz clic</span><br />
-          para seleccionarlo
+          {{ $t('uploadWidget.instruction') }}
         </div>
       </label>
       <input
@@ -43,7 +43,7 @@
     </div>
 
    <button class="submit-btn" :disabled="!selectedFile || isSubmitting" @click="submitFile">
-    <template v-if="!isSubmitting">Enviar</template>
+    <template v-if="!isSubmitting">{{ $t('uploadWidget.send') }}</template>
     <template v-else><Spinner :size="18" :border="2" /></template>
    </button>
 
@@ -55,7 +55,9 @@
 <script setup>
 import { ref } from 'vue'
 import Spinner from '@/components/Spinner.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t: $t } = useI18n()
 const status = ref('idle') // 'idle' | 'loaded' | 'error'
 const statusMessage = ref('')
 const selectedFile = ref(null)
@@ -69,11 +71,11 @@ function handleDrop(event) {
   if (file && file.type === 'application/pdf') {
     selectedFile.value = file
     status.value = 'loaded'
-    statusMessage.value = 'Archivo cargado correctamente'
+    statusMessage.value = $t('uploadWidget.success')
   } else {
     selectedFile.value = null
     status.value = 'error'
-    statusMessage.value = 'Solo se permiten archivos PDF.'
+    statusMessage.value = $t('uploadWidget.onlyPdf')
   }
 }
 
@@ -115,16 +117,16 @@ async function submitFile() {
 
     if (!response.ok || !result.success) {
       status.value = 'error'
-      statusMessage.value = result.message || 'Error en la carga del archivo.'
+      statusMessage.value = result.message || $t('uploadWidget.uploadError') 
     } else {
       status.value = 'loaded'
-      statusMessage.value = result.message || 'Archivo subido correctamente.'
+      statusMessage.value = result.message || $t('uploadWidget.success')
       emit('uploaded', result)
     }
   } catch (err) {
     console.error(err)
     status.value = 'error'
-    statusMessage.value = 'Error de red o del servidor.'
+    statusMessage.value = $t('uploadWidget.serverError') 
   } finally {
     isSubmitting.value = false
   }

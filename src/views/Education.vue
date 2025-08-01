@@ -1,18 +1,20 @@
 <template>
   <section>
-    <h2>Entrevistas</h2>
+    <h2>{{ $t('edu.interviews') }}</h2>
     <YouTubeCarousel playlistId="PLAYLIST_ID_ENTREVISTAS" />
 
-    <h2>Tendencias</h2>
+    <h2>{{ $t('edu.trends') }}</h2>
     <YouTubeCarousel playlistId="PLAYLIST_ID_TENDENCIAS" />
 
-    <h2>Consejos</h2>
+    <h2>{{ $t('edu.tips') }}</h2>
     <YouTubeCarousel playlistId="PLAYLIST_ID_CONSEJOS" />
   </section>
 </template>
 
 <script setup>
 import YouTubeCarousel from '@/components/YouTubeCarousel.vue'
+import { useI18n } from 'vue-i18n'
+const { t: $t } = useI18n()
 </script>
 
 

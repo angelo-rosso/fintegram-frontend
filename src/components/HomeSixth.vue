@@ -5,10 +5,8 @@
         <!-- Subsection 1: Tecnología -->
         <div class="row align-items-center mb-5 flex-column-reverse flex-lg-row">
           <div class="col-lg-6 text-center text-lg-start mt-4 mt-lg-0 animate-slide-left">
-            <h2 class="fintegram-heading">Tecnología</h2>
-            <p class="fintegram-subtitle">
-              Aplicamos tecnología apalancada en big data para generar leads con un alto porcentaje de conversión.
-            </p>
+            <h2 class="fintegram-heading">{{ t('duo.tech.title') }}</h2>
+            <p class="fintegram-subtitle">{{ t('duo.tech.description') }}</p>
           </div>
           <div class="col-lg-6 text-center animate-slide-right">
             <img
@@ -33,10 +31,8 @@
             />
           </div>
           <div class="col-lg-6 text-center text-lg-start animate-slide-right">
-            <h2 class="fintegram-heading">Ecosistema</h2>
-            <p class="fintegram-subtitle">
-              Aplicamos tecnología apalancada en big data para generar leads con un alto porcentaje de conversión.
-            </p>
+            <h2 class="fintegram-heading">{{ t('duo.ecosystem.title') }}</h2>
+            <p class="fintegram-subtitle">{{ t('duo.ecosystem.description') }}</p>
           </div>
         </div>
       </div>
@@ -44,6 +40,11 @@
   </section>
 </template>
 
+<script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+</script>
 
 <style scoped>
 .fintegram-duo-section {

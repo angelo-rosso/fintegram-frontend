@@ -6,10 +6,10 @@
           <!-- Text -->
           <div class="col-lg-6 text-center text-lg-start mt-4 mt-lg-0 animate-slide-left">
             <h1 class="fintegram-heading">
-              Construyamos un sistema colaborativo
+              {{ $t('ecosystem.title') }}
             </h1>
             <p class="fintegram-subtitle">
-              Unimos fuerzas para impulsar el crecimiento y la innovación en el ecosistema empresarial.
+              {{ $t('ecosystem.subtitle') }}
             </p>
           </div>
 
@@ -26,6 +26,7 @@
     </div>
   </section>
 </template>
+
 
 <script setup>
 // No JS logic needed unless you want to animate on scroll

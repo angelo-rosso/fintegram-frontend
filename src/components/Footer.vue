@@ -1,10 +1,10 @@
-<!-- src/components/Footer.vue -->
 <template>
   <footer class="text-center py-4 footer-info">
-    <p>Somos un producto de la firma de Auditoría SW registrada en Chile</p>
-    <p>&copy; {{ currentYear }} Fintegram. Todos los derechos reservados.</p>
+    <p>{{ $t('footer.audit') }}</p>
+    <p>&copy; {{ currentYear }} Fintegram. {{ $t('footer.rights') }}</p>
   </footer>
 </template>
+
 
 <script setup>
 const currentYear = new Date().getFullYear()

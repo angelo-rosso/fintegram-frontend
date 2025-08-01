@@ -4,11 +4,10 @@
       <div class="container py-5">
         <div class="row align-items-center flex-column-reverse flex-lg-row">
           <!-- Text -->
-          <div
-            class="col-lg-6 text-center text-lg-start mt-4 mt-lg-0 animate-slide-left">
-            <h1 class="fintegram-heading">Pyme Power</h1>
+          <div class="col-lg-6 text-center text-lg-start mt-4 mt-lg-0 animate-slide-left">
+            <h1 class="fintegram-heading">{{ $t('pymepower.title') }}</h1>
             <p class="fintegram-subtitle">
-              Te acompañamos en el crecimiento de tu emprendimiento.
+              {{ $t('pymepower.subtitle') }}
             </p>
           </div>
 
@@ -25,6 +24,7 @@
     </div>
   </section>
 </template>
+
 
 
 <style scoped>
