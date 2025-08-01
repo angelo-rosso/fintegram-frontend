@@ -11,10 +11,10 @@ import './styles/bootstrap-custom.scss'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 const app = createApp(App)
+const API_URL = import.meta.env.VITE_API_URL
 
 
-
-fetch('/api/i18n?lang=en', {
+fetch(`${API_URL}/i18n?lang=en`, {
     headers: {
     'Accept': 'application/json'
   }
@@ -33,8 +33,3 @@ fetch('/api/i18n?lang=en', {
     console.error('Failed to load translations:', err)
     app.use(i18n) // still mount the app with fallback messages
     app.mount('#app')})
-
-
-
-
-

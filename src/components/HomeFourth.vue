@@ -29,7 +29,8 @@
 
 
 <script setup>
-// No JS logic needed unless you want to animate on scroll
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <div class="score-result" v-if="score">
-   <h3 class="status-name" :style="{ color: scoreColor }">{{ scoreStatusName }}</h3>
+    <h3 class="status-name" :style="{ color: scoreColor }">{{ scoreStatusName }}</h3>
 
     <ScoreSvgGauge
       :score="score"
@@ -8,18 +8,18 @@
       :scoreStatusDescription="scoreStatusDescription"
       @animation-complete="onGaugeAnimationComplete"
     />
-    <div class="score-widget">
-      <h3>{{ score.scoreStatusName }}</h3>
-      <p>{{ score.scoreStatusDescription }}</p>
 
+    <div class="score-widget">
+      <h3>{{ scoreStatusName }}</h3>
+      <p>{{ scoreStatusDescription }}</p>
     </div>
-    <button
-      class="action-button"
-      :disabled="!gaugeDone">
-      Solicitar Informe
+
+    <button class="action-button" :disabled="!gaugeDone">
+      {{ $t('score.requestReport') }}
     </button>
   </div>
 </template>
+
 
 
 <script setup>

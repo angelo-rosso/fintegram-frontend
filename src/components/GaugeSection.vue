@@ -1,16 +1,17 @@
 <template>
   <section id="fifth-section">
-    <h1>Evaluación crediticia</h1>
-    <p>Carga de carpeta tributaria electrónica</p>
+    <h1>{{ $t('credit.title') }}</h1>
+    <p>{{ $t('credit.description') }}</p>
 
     <div class="gauge-container text-center">
-      <h4 class="gauge-title">Tu calificación:</h4>
+      <h4 class="gauge-title">{{ $t('credit.scoreLabel') }}</h4>
       <h5 id="gauge-subtitle">{{ subtitle }}</h5>
       <canvas ref="gaugeCanvas" width="300" height="150"></canvas>
       <p id="gaugeValue">{{ gaugeValue }}</p>
     </div>
   </section>
 </template>
+
 
 <script setup>
 import { onMounted, ref } from 'vue'
